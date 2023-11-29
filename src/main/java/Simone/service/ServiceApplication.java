@@ -12,9 +12,4 @@ public class ServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ServiceApplication.class, args);
 	}
-
-	@GetMapping("/hello")
-	public String sayHello(@RequestParam(value = "nyaaaaaa", defaultValue = "OwO") String name) {
-		return String.format("UwU %s!", name);
-	}
 }
