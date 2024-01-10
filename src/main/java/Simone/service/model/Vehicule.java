@@ -1,5 +1,7 @@
 package Simone.service.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,11 +21,15 @@ public class Vehicule {
 
     private String nom;
 
-    @ManyToOne
-    @JoinColumn(name = "id_utilisateur")
-    private Utilisateur utilisateur;
-
     public Vehicule() {
+    }
+
+    @JsonCreator
+    public Vehicule(@JsonProperty("marque") String marque, @JsonProperty("type") String type, @JsonProperty("modele") String modele, @JsonProperty("nom") String nom) {
+        this.marque = marque;
+        this.type = type;
+        this.modele = modele;
+        this.nom = nom;
     }
 
     public int getId() {
@@ -66,6 +72,11 @@ public class Vehicule {
         this.nom = nom;
     }
 
+    /*
+    @ManyToOne
+    @JoinColumn(name = "id_utilisateur")
+    private Utilisateur utilisateur;
+
     public Utilisateur getUtilisateur() {
         return utilisateur;
     }
@@ -73,4 +84,5 @@ public class Vehicule {
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
     }
+    */
 }

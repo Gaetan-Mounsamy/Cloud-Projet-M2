@@ -1,8 +1,12 @@
 package Simone.service.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Set;
 
 @Entity
 public class Utilisateur {
@@ -17,12 +21,17 @@ public class Utilisateur {
 
     private int id_vehicule;
 
-    @OneToMany(mappedBy = "utilisateur")
-    private ArrayList<Vehicule> vehicules = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "id_famille")
-    private Famille famille;
+    public Utilisateur() {
+
+    }
+
+    @JsonCreator
+    public Utilisateur(@JsonProperty("prenom") String prenom, @JsonProperty("nbr_vehicule") int nbr_vehicule, @JsonProperty("id_vehicule") int id_vehicule) {
+        this.prenom = prenom;
+        this.nbr_vehicule = nbr_vehicule;
+        this.id_vehicule = id_vehicule;
+    }
 
     public int getId_utilisateur() {
         return id_utilisateur;
@@ -56,13 +65,88 @@ public class Utilisateur {
         this.id_vehicule = id_vehicule;
     }
 
-    public ArrayList<Vehicule> getVehicules() {
+    /*
+    @OneToMany(mappedBy = "utilisateur")
+    private Set<Vehicule> vehicules = new Set<Vehicule>() {
+        @Override
+        public int size() {
+            return 0;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return false;
+        }
+
+        @Override
+        public boolean contains(Object o) {
+            return false;
+        }
+
+        @Override
+        public Iterator<Vehicule> iterator() {
+            return null;
+        }
+
+        @Override
+        public Object[] toArray() {
+            return new Object[0];
+        }
+
+        @Override
+        public <T> T[] toArray(T[] a) {
+            return null;
+        }
+
+        @Override
+        public boolean add(Vehicule vehicule) {
+            return false;
+        }
+
+        @Override
+        public boolean remove(Object o) {
+            return false;
+        }
+
+        @Override
+        public boolean containsAll(Collection<?> c) {
+            return false;
+        }
+
+        @Override
+        public boolean addAll(Collection<? extends Vehicule> c) {
+            return false;
+        }
+
+        @Override
+        public boolean retainAll(Collection<?> c) {
+            return false;
+        }
+
+        @Override
+        public boolean removeAll(Collection<?> c) {
+            return false;
+        }
+
+        @Override
+        public void clear() {
+
+        }
+    };
+
+    public Set<Vehicule> getVehicules() {
         return vehicules;
     }
 
-    public void setVehicules(ArrayList<Vehicule> vehicules) {
+    public void setVehicules(Set<Vehicule> vehicules) {
         this.vehicules = vehicules;
     }
+    */
+
+    /*
+    @ManyToOne
+    @JoinColumn(name = "id_famille")
+    private Famille famille;
 
     public Famille getFamille() {
         return famille;
@@ -71,4 +155,5 @@ public class Utilisateur {
     public void setFamille(Famille famille) {
         this.famille = famille;
     }
+    */
 }
